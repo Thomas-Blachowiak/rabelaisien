@@ -9,3 +9,15 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
+#recette {
+    color: white;
+    height: 600px;
+    width: auto;
+    background-image: linear-gradient(rgba(1, 0, 1, 0), rgba(0, 0, 0, 0.5)),
+        /* Dégradé semi-transparent */ url("../images/braise.png");
+    /* Votre image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
