@@ -1,4 +1,5 @@
 <?php
+require_once "includes/connect.php";
 require_once "includes/header.php";
 include_once "includes/nav.php";
 ?>
