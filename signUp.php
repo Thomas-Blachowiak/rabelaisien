@@ -1,9 +1,9 @@
 <?php
 // On démarre la session PHP
 session_start();
-// Si on est connecté on va sur profil.php
+// Si on est connecté on va sur recipes.php
 if (isset($_SESSION["user"])) {
-    header("Location: profil.php");
+    header("Location: recipes.php");
     exit;
 }
 // On vérifie si le formulaire a été envoyé
@@ -32,11 +32,11 @@ if (!empty($_POST)) {
             // On enregistre en bdd
             require_once "includes/connect.php";
 
-            $sql = "INSERT INTO `users`(`name`, `email`, `password`, `roles`) VALUES (:pseudo, :email, '$pass', '[\"ROLE_USER\"]')";
+            $sql = "INSERT INTO `users`(`name`, `email`, `password`, `roles`) VALUES (:nickname, :email, '$pass', '[\"ROLE_USER\"]')";
 
             $request = $db->prepare($sql);
 
-            $request->bindValue(":pseudo", $nickname, PDO::PARAM_STR);
+            $request->bindValue(":nickname", $nickname, PDO::PARAM_STR);
             $request->bindValue(":email", $_POST["email"], PDO::PARAM_STR);
 
             $request->execute();
@@ -51,7 +51,7 @@ if (!empty($_POST)) {
             // On stocke dans $_SESSION les information de l'utilisateur
             $_SESSION["user"] = [
                 "id" => $id,
-                "pseudo" => $nickname,
+                "nickname" => $nickname,
                 "email" => $_POST["email"],
                 "roles" => ["ROLE_USER"]
             ];
