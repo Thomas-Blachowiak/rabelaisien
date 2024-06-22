@@ -1,8 +1,9 @@
 <?php
 session_start();
 require_once "includes/connect.php";
+$author = $_SESSION["user"]["nickname"];
 //On écrit la requête
-$sql = "SELECT * FROM `recipes`";
+$sql = "SELECT * FROM `recipes` WHERE `author`= '$author'";
 
 //On exécute la requête
 $request = $db->query($sql);
@@ -17,7 +18,7 @@ include_once "includes/nav.php";
     <div class="container">
         <div class="col">
             <h1 class="p-4 fs-1">
-                <strong>Les Réjouissances culinaires de nos compères</strong>
+                <strong>Les Réjouissances que j'ai partagé</strong>
             </h1>
         </div>
     </div>
@@ -38,8 +39,13 @@ include_once "includes/nav.php";
                     <div class="card-text"><?= nl2br(strip_tags($recipe["preparation"])) ?></div><br>
                     <p class="card-text text-muted">Temps estimé :
                         <?= strip_tags($recipe["duration"]) ?></p>
-                    <p class="card-text text-muted">Publié par :
-                        <?= strip_tags($recipe["author"]) ?></p>
+                    <a href="recipe.php?id=<?= $recipe["id_recipes"] ?>" class="btn btn-primary">
+                        Modifier la recette
+                    </a>
+                    <a href="recipe.php?id=<?= $recipe["id_recipes"] ?>" class="btn btn-primary">
+                        Modifier la recette
+                    </a>
+                    <a href="recipe_delete.php" class="btn btn-primary">Supprimer la recette</a>
                 </div>
             </article>
         </div>
