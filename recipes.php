@@ -23,23 +23,26 @@ include_once "includes/nav.php";
     </div>
 </div>
 
-<section class="container">
+<section class="container mt-4">
     <div class="row">
         <?php foreach ($recipes as $recipe) : ?>
-            <div class="col-md-4 mb-4">
-                <article class="card h-100">
-                    <div class="card-body">
-                        <h2 class="card-title">
-                            <a href="article.php?id=<?= $recipe["id_recipes"] ?>" class="text-decoration-none">
-                                <?= strip_tags($recipe["title"]) ?>
-                            </a>
-                        </h2>
-                        <div class="card-text"><?= nl2br(strip_tags($recipe["content"])) ?></div>
-                        <p class="card-text text-muted">Publié par :
-                            <?= strip_tags($recipe["author"]) ?></p>
-                    </div>
-                </article>
-            </div>
+        <div class="col-md-4 mb-4">
+            <article class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <a href="article.php?id=<?= $recipe["id_recipes"] ?>" class="text-decoration-none">
+                            <?= strip_tags($recipe["title"]) ?>
+                        </a>
+                    </h2>
+                    <div class="card-text"><?= nl2br(strip_tags($recipe["ingredient"])) ?></div><br>
+                    <div class="card-text"><?= nl2br(strip_tags($recipe["preparation"])) ?></div><br>
+                    <p class="card-text text-muted">Temps estimé :
+                        <?= strip_tags($recipe["duration"]) ?></p>
+                    <p class="card-text text-muted">Publié par :
+                        <?= strip_tags($recipe["author"]) ?></p>
+                </div>
+            </article>
+        </div>
         <?php endforeach; ?>
     </div>
 </section>
