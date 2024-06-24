@@ -2,16 +2,20 @@
 session_start();
 require_once "includes/connect.php";
 
+header('Content-Type: application/json');
+
 // Vérifiez si l'utilisateur est connecté
 if (!isset($_SESSION['user']['id'])) {
-    die("Vous devez être connecté pour liker.");
+    echo json_encode(["success" => false, "message" => "Vous devez être connecté pour liker."]);
+    exit;
 }
 
 $userId = $_SESSION['user']['id'];
 
 // Vérifiez si l'ID de la recette est fourni
 if (!isset($_POST['recipe_id']) || empty($_POST['recipe_id'])) {
-    die("ID de recette manquant !");
+    echo json_encode(["success" => false, "message" => "ID de recette manquant !"]);
+    exit;
 }
 
 $recipeId = (int)$_POST['recipe_id'];
@@ -24,7 +28,8 @@ $request->bindValue(':user_id', $userId, PDO::PARAM_INT);
 $request->execute();
 
 if ($request->fetch()) {
-    die("Vous avez déjà aimé cette recette.");
+    echo json_encode(["success" => false, "message" => "Vous avez déjà aimé cette recette."]);
+    exit;
 }
 
 // Ajoutez le like
@@ -40,8 +45,16 @@ if ($request->execute()) {
     $request->bindValue(':recipe_id', $recipeId, PDO::PARAM_INT);
     $request->execute();
 
-    header("Location: recipes.php");
+    // Récupérez le nouveau nombre de likes
+    $sql = "SELECT like_count FROM recipes WHERE id_recipes = :recipe_id";
+    $request = $db->prepare($sql);
+    $request->bindValue(':recipe_id', $recipeId, PDO::PARAM_INT);
+    $request->execute();
+    $likeCount = $request->fetchColumn();
+
+    echo json_encode(["success" => true, "like_count" => $likeCount]);
     exit;
 } else {
-    die("Une erreur est survenue lors de l'ajout du like.");
+    echo json_encode(["success" => false, "message" => "Une erreur est survenue lors de l'ajout du like."]);
+    exit;
 }
