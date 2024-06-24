@@ -39,13 +39,13 @@ include_once "includes/nav.php";
                     <div class="card-text"><?= nl2br(strip_tags($recipe["preparation"])) ?></div><br>
                     <p class="card-text text-muted">Temps estimé :
                         <?= strip_tags($recipe["duration"]) ?></p>
-                    <a href="recipe.php?id=<?= $recipe["id_recipes"] ?>" class="btn btn-primary">
+                    <a href="recipe_update.php?id=<?= $recipe["id_recipes"] ?>" class="btn btn-primary">
                         Modifier la recette
                     </a>
-                    <a href="recipe.php?id=<?= $recipe["id_recipes"] ?>" class="btn btn-primary">
-                        Modifier la recette
+                    <a href="recipe_delete.php?id=<?= $recipe["id_recipes"] ?>" class="btn btn-danger">
+                        Supprimer la recette
                     </a>
-                    <a href="recipe_delete.php" class="btn btn-primary">Supprimer la recette</a>
+
                 </div>
             </article>
         </div>

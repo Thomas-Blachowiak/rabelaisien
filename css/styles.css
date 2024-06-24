@@ -1,6 +1,6 @@
 #about-me {
     color: white;
-    height: 900px;
+    height: 700px;
     width: auto;
     background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
         /* Dégradé semi-transparent */ url("../images/home.png");
