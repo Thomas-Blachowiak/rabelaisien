@@ -41,6 +41,8 @@ include_once "includes/nav.php";
                     <p class="card-text text-muted">Publié par :
                         <?= strip_tags($recipe["author"]) ?></p>
                 </div>
+                <img src="data:image/jpeg;base64,<?= base64_encode($recipe['image']) ?>" class="card-img-bottom"
+                    alt=" <?= htmlspecialchars($recipe['title']) ?>">
             </article>
         </div>
         <?php endforeach; ?>

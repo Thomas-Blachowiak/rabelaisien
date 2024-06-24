@@ -22,7 +22,8 @@
             <a class="nav-link p-2" aria-current="page" href="signIn.php">Accès</a>
             <a class="nav-link p-2" aria-current="page" href="signUp.php">Ralliement</a>
             <?php else : ?>
-            <a class="nav-link p-2" aria-current="page" href="signOut.php">Sortie</a>
+            <a class="nav-link p-2 disabled">Bonjour <?php echo $_SESSION["user"]["nickname"]; ?> !</a>
+            <a class="nav-link p-2" aria-current="page" href="signOut.php"><strong>Sortie</strong></a>
             <?php endif; ?>
         </div>
     </div>

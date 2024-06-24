@@ -38,9 +38,17 @@ if (!empty($_POST)) {
     $preparation = htmlspecialchars($_POST['preparation']);
     $duration = strip_tags($_POST['duration']);
 
-    // Mettez à jour la recette
-    $sql = "UPDATE `recipes` SET `title` = :title, `ingredient` = :ingredient, `preparation` = :preparation, `duration` = :duration WHERE `id_recipes` = :id";
-    $request = $db->prepare($sql);
+    // Gestion de l'image
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+        $image = file_get_contents($_FILES['image']['tmp_name']);
+        $sql = "UPDATE `recipes` SET `title` = :title, `ingredient` = :ingredient, `preparation` = :preparation, `duration` = :duration, `image` = :image WHERE `id_recipes` = :id";
+        $request = $db->prepare($sql);
+        $request->bindValue(':image', $image, PDO::PARAM_LOB);
+    } else {
+        $sql = "UPDATE `recipes` SET `title` = :title, `ingredient` = :ingredient, `preparation` = :preparation, `duration` = :duration WHERE `id_recipes` = :id";
+        $request = $db->prepare($sql);
+    }
+
     $request->bindValue(':title', $title, PDO::PARAM_STR);
     $request->bindValue(':ingredient', $ingredient, PDO::PARAM_STR);
     $request->bindValue(':preparation', $preparation, PDO::PARAM_STR);
@@ -56,6 +64,7 @@ if (!empty($_POST)) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -69,7 +78,7 @@ if (!empty($_POST)) {
 <body>
     <div class="container mt-5">
         <h1>Modifier la recette</h1>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Titre</label>
                 <input type="text" name="title" id="title" class="form-control"
@@ -89,6 +98,14 @@ if (!empty($_POST)) {
                 <label for="duration">Durée</label>
                 <input type="text" name="duration" id="duration" class="form-control"
                     value="<?= strip_tags($recipe['duration']) ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" name="image" id="image" class="form-control-file">
+                <?php if ($recipe['image']) : ?>
+                <img src="data:image/jpeg;base64,<?= base64_encode($recipe['image']) ?>"
+                    alt="<?= htmlspecialchars($recipe['title']) ?>" class="img-fluid mt-2">
+                <?php endif; ?>
             </div>
             <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
         </form>
