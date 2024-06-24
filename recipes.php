@@ -13,7 +13,6 @@ $recipes = $request->fetchAll();
 require_once "includes/header.php";
 include_once "includes/nav.php";
 ?>
-<?php var_dump($_SESSION); ?>
 <div class="d-flex align-items-center justify-content-center" id="recette">
     <div class="container">
         <div class="col">
@@ -42,7 +41,8 @@ include_once "includes/nav.php";
                     <p class="card-text text-muted">Publié par :
                         <?= strip_tags($recipe["author"]) ?></p>
                     <button data-recipe-id="<?= $recipe['id_recipes'] ?>" class="btn btn-primary like-btn">
-                        Like <span class="like-count"><?= $recipe['like_count'] ?></span>
+                        <span class="like-count pr-1"><?= $recipe['like_count'] ?></span>
+                        Like
                     </button>
 
                 </div>

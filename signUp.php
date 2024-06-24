@@ -76,28 +76,23 @@ include_once "includes/nav.php";
     if (isset($_SESSION["error"])) {
         foreach ($_SESSION["error"] as $message)
     ?>
-        <p><?= $message ?></p>
+    <p><?= $message ?></p>
     <?php
     }
     ?>
     <form method="post">
-        <div class="form-group">
-            <label for="pseudo">Pseudo</label>
+        <div class="form-group p-2">
+            <label for="pseudo">Pseudo :</label>
             <input type="text" name="nickname" id="nickname" class="form-control">
         </div>
-        <div class="form-group">
-            <label for="email">Email</label>
+        <div class="form-group p-2">
+            <label for="email">Email :</label>
             <input type="email" name="email" id="email" class="form-control">
         </div>
-        <div class="form-group">
-            <label for="pass">Mot de passe</label>
+        <div class="form-group p-2">
+            <label for="pass">Mot de passe :</label>
             <input type="password" name="pass" id="pass" class="form-control">
         </div>
-        <button type="submit" class="btn btn-primary btn-block">M'inscrire</button>
+        <button type="submit" class="btn btn-primary btn-block p-2">M'inscrire</button>
     </form>
 </div>
-
-
-<?php
-include_once "includes/footer.php";
-?>

@@ -83,20 +83,17 @@ include_once "includes/nav.php";
     }
     unset($_SESSION["error"]);
     ?>
-    <form method="post">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="pass">Mot de passe</label>
-            <input type="password" name="pass" id="pass" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Me connecter</button>
-    </form>
+    <div class="col-6 col-12">
+        <form method="post">
+            <div class="form-group p-2">
+                <label for="email">Email :</label>
+                <input type="email" name="email" id="email" class="form-control">
+            </div>
+            <div class="form-group p-2">
+                <label for="pass">Mot de passe :</label>
+                <input type="password" name="pass" id="pass" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block p-2">Me connecter</button>
+        </form>
+    </div>
 </div>
-
-
-<?php
-include_once "includes/footer.php";
-?>
