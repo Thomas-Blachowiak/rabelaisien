@@ -13,6 +13,7 @@ $recipes = $request->fetchAll();
 require_once "includes/header.php";
 include_once "includes/nav.php";
 ?>
+<?php var_dump($_SESSION); ?>
 <div class="d-flex align-items-center justify-content-center" id="recette">
     <div class="container">
         <div class="col">
@@ -40,6 +41,12 @@ include_once "includes/nav.php";
                         <?= strip_tags($recipe["duration"]) ?></p>
                     <p class="card-text text-muted">Publié par :
                         <?= strip_tags($recipe["author"]) ?></p>
+                    <form method="post" action="like_recipe.php">
+                        <input type="hidden" name="recipe_id" value="<?= $recipe['id_recipes'] ?>">
+                        <button type="submit" class="btn btn-primary">
+                            Like <span class="like-count"><?= $recipe['like_count'] ?></span>
+                        </button>
+                    </form>
                 </div>
                 <img src="data:image/jpeg;base64,<?= base64_encode($recipe['image']) ?>" class="card-img-bottom"
                     alt=" <?= htmlspecialchars($recipe['title']) ?>">

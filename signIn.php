@@ -51,7 +51,7 @@ if (!empty($_POST)) {
 
                 // On stocke dans $_SESSION les information de l'utilisateur
                 $_SESSION["user"] = [
-                    "id" => $user["id"],
+                    "id" => $user["id_users"],
                     "nickname" => $user["name"],
                     "email" => $user["email"],
                     "roles" => $user["roles"]
@@ -78,7 +78,7 @@ include_once "includes/nav.php";
     if (isset($_SESSION["error"])) {
         foreach ($_SESSION["error"] as $message)
     ?>
-        <p><?= $message ?></p>
+    <p><?= $message ?></p>
     <?php
     }
     unset($_SESSION["error"]);
